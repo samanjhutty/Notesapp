@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size">18sp</dimen>
     <dimen name="heading_text">45sp</dimen>
     <dimen name="title_text">24sp</dimen>
-    <dimen name="title_text_fragment">20sp</dimen>
+    <dimen name="title_text_fragment">22sp</dimen>
     <dimen name="margin_small">16dp</dimen>
     <dimen name="margin_mini">8dp</dimen>
     <dimen name="margin_Medium">24sp</dimen>

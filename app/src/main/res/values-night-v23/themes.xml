@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Note" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/icon_color</item>
+        <item name="colorAccent">@color/bg_secondary</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

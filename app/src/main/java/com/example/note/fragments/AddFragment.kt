@@ -77,70 +77,102 @@ class AddFragment : Fragment() {
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_oyster_bay))
                         selectedColor = "#d7feff"
                         layoutcolor = "#d7feff"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.bg_grey))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.bg_grey))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_oyster_bay)
                         binding.etContent.setTextColor(resources.getColor(R.color.text_color))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.text_color))
                         textcolor="#606060"
                     }
                     R.id.color2 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_cruise))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_cruise))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_cruise)
                         selectedColor = "#abead8"
                         layoutcolor = "#abead8"
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
-                        textcolor="#606060"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
+                        textcolor="#FFFFFF"
 
                     }
                     R.id.color3 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_we_peep))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_we_peep))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_we_peep)
                         selectedColor = "#f2cbf2"
                         layoutcolor = "#f2cbf2"
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
-                        textcolor="#606060"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
+                        textcolor="#FFFFFF"
 
                     }
                     R.id.color4 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_cherokee))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_cherokee))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_cherokee)
                         selectedColor = "#fada95"
                         layoutcolor = "#fada95"
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
                         textcolor="#606060"
 
                     }
                     R.id.color5 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_illusion))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_illusion))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_illusion)
                         selectedColor = "#f3b0c3"
                         layoutcolor = "#f3b0c3"
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
-                        textcolor="#606060"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
+                        textcolor="#FFFFFF"
 
                     }
                     R.id.color6 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_spring_rain))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_spring_rain))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_spring_rain)
                         selectedColor = "#b6cfb6"
                         layoutcolor = "#b6cfb6"
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
-                        textcolor="#606060"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
+                        textcolor="#FFFFFF"
 
 
                     }
                     R.id.color7 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.white))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.white))
+                        window?.statusBarColor = this.resources.getColor(R.color.white)
                         selectedColor = "#ffffff"
                         layoutcolor = "#ffffff"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.bg_grey))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.bg_grey))
                         binding.etContent.setTextColor(resources.getColor(R.color.text_color))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.text_color))
                         textcolor="#606060"
 
                     }
                     R.id.color8 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_grey))
                         binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_grey))
+                        window?.statusBarColor = this.resources.getColor(R.color.bg_grey)
                         selectedColor = "#A9A9A9"
                         layoutcolor = "#A9A9A9"
+                        binding.etContent.setHintTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
                         binding.etContent.setTextColor(resources.getColor(R.color.white))
+                        binding.etTitle.setTextColor(resources.getColor(R.color.white))
                         textcolor="#FFFFFF"
 
                     }
@@ -230,6 +262,14 @@ class AddFragment : Fragment() {
             binding.etContent.setText(desc)
             binding.layout.setBackgroundColor(Color.parseColor(color))
             binding.imagelayout.setBackgroundColor(Color.parseColor(layoutcolor))
+            val window = (activity as? AppCompatActivity)?.window
+            window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window?.statusBarColor = Color.parseColor(layoutcolor)
+            binding.etContent.setTextColor(Color.parseColor(textcolor))
+            binding.etTitle.setTextColor(Color.parseColor(textcolor))
+            binding.etContent.setHintTextColor(Color.parseColor(textcolor))
+            binding.etTitle.setHintTextColor(Color.parseColor(textcolor))
 
             Glide.with(requireContext()).load(imagepath).into(binding.ivImage)
         }
