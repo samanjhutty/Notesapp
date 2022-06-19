@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_backgroundColor"
+        android:title="@string/action_color"
+        android:icon="@drawable/bg_color">
+        <menu>
+            <item android:id="@+id/color1"
+                android:title="@string/oyster_bay"
+                android:icon="@drawable/bg_color1" />
+            <item android:id="@+id/color2"
+                android:title="@string/cruise"
+                android:icon="@drawable/bg_color2"/>
+            <item android:id="@+id/color3"
+                android:title="@string/we_peep"
+                android:icon="@drawable/bg_color3"/>
+            <item android:id="@+id/color4"
+                android:title="@string/cherokee"
+                android:icon="@drawable/bg_color4"/>
+            <item android:id="@+id/color5"
+                android:title="@string/illusion"
+                android:icon="@drawable/bg_color5"/>
+            <item android:id="@+id/color6"
+                android:title="@string/spring_rain"
+                android:icon="@drawable/bg_color6"/>
+            <item android:id="@+id/color7"
+                android:title="@string/white"
+                android:icon="@drawable/bg_color7" />
+            <item android:id="@+id/color8"
+                android:title="@string/grey"
+                android:icon="@drawable/bg_color8" />
+
+
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_attach"
+        android:title="@string/attach"
+        app:showAsAction="always"
+        android:icon="@drawable/attach_file" />
+    <item
+        android:id="@+id/saveNote"
+        android:title="@string/save" />
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete" />
+</menu>
