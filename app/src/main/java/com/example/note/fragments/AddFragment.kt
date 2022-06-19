@@ -261,7 +261,6 @@ class AddFragment : Fragment() {
             binding.etTitle.setText(title)
             binding.etContent.setText(desc)
             binding.layout.setBackgroundColor(Color.parseColor(color))
-            binding.imagelayout.setBackgroundColor(Color.parseColor(layoutcolor))
             val window = (activity as? AppCompatActivity)?.window
             window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
