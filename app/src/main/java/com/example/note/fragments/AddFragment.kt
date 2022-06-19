@@ -120,7 +120,7 @@ class AddFragment : Fragment() {
                         binding.etTitle.setHintTextColor(resources.getColor(R.color.white))
                         binding.etContent.setTextColor(resources.getColor(R.color.white))
                         binding.etTitle.setTextColor(resources.getColor(R.color.white))
-                        textcolor="#606060"
+                        textcolor="#FFFFFF"
 
                     }
                     R.id.color5 -> {
@@ -270,6 +270,12 @@ class AddFragment : Fragment() {
             binding.etContent.setHintTextColor(Color.parseColor(textcolor))
             binding.etTitle.setHintTextColor(Color.parseColor(textcolor))
 
+            if(imagepath.isNullOrBlank()){
+                binding.imagelayout.visibility=View.GONE
+            }
+            else if(imagepath.isNotBlank()){
+                binding.imagelayout.visibility=View.VISIBLE
+            }
             Glide.with(requireContext()).load(imagepath).into(binding.ivImage)
         }
         else{
