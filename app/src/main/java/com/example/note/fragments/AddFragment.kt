@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -30,6 +31,8 @@ class AddFragment : Fragment() {
     var textcolor ="#606060"
     var id2:Int=1
     var up=0
+    var count:String="0"
+
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         // Handle the returned Uri
         imagepath= uri.toString()
@@ -237,6 +240,7 @@ class AddFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 val a=Intent(requireContext(),HomeActivity::class.java)
+                a.putExtra("count",count)
                 startActivity(a)
                 requireActivity().finish()
                 Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_SHORT).show()
@@ -255,6 +259,8 @@ class AddFragment : Fragment() {
             layoutcolor = bundle.getString("laycolor").toString()
             textcolor = bundle.getString("textcolor").toString()
             imagepath = bundle.getString("url").toString()
+            count=bundle.getString("count").toString()
+
             selectedColor=color
             up=1
 
@@ -308,6 +314,7 @@ class AddFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 val a= Intent(requireContext(), HomeActivity::class.java)
+                a.putExtra("count",count)
                 startActivity(a)
                 requireActivity().finish()
                 Toast.makeText(requireContext(), " Data Updated", Toast.LENGTH_SHORT).show()
@@ -332,6 +339,7 @@ class AddFragment : Fragment() {
                 super.onPostExecute(result)
                 Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
                 val a = Intent(requireContext(), HomeActivity::class.java)
+                a.putExtra("count",count)
                 startActivity(a)
                 requireActivity().finish()
             }

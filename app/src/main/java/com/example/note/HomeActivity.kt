@@ -1,5 +1,6 @@
 package com.example.note
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -72,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
             override fun onQueryTextChange(p0: String?): Boolean {
 
                 for (arr in arrNotes){
-                    if (arr.title!!.toLowerCase(Locale.getDefault()).contains(p0.toString())){
+                    if (arr.title!!.lowercase(Locale.getDefault()).contains(p0.toString())){
 //                        adapter = RecyclerViewAdapterNote()
 //                        binding.list.adapter = adapter
                     }
@@ -83,5 +84,19 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        val intent= Intent()
+        val a=intent.getStringExtra("count")
+        binding.notesSize.text = "$a notes"
+
+
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if(binding.layoutMain.visibility == View.GONE){
+            HomeActivity()
+        }
     }
 }
