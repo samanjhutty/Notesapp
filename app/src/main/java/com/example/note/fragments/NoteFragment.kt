@@ -3,10 +3,12 @@ package com.example.note.fragments
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -32,6 +34,25 @@ class NoteFragment : Fragment() {
         mlist.layoutManager =  GridLayoutManager(requireContext(),3)
 
         getData()
+
+        binding.btnAddNote.setOnClickListener {
+            binding.layoutMain.visibility = View.GONE
+            requireActivity().supportFragmentManager.beginTransaction().apply {
+                remove(NoteFragment())
+                replace(R.id.homeLayoutContainer, AddFragment())
+            }.commit()
+
+        }
+
+        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return true
+            }
+        })
 
         binding.view.setOnClickListener {
             val popup = PopupMenu(requireContext(), binding.view)
@@ -68,7 +89,6 @@ class NoteFragment : Fragment() {
                 return null
             }
 
-            @SuppressLint("NotifyDataSetChanged")
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 adapter = RecyclerViewAdapterNote(list,this@NoteFragment)

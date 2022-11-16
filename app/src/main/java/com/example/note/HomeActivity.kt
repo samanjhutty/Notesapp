@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.note.databinding.ActivityHomeBinding
-import com.example.note.fragments.HomeFragment
 import com.example.note.fragments.NoteFragment
 
 class HomeActivity : AppCompatActivity() {
@@ -23,7 +22,7 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
 
-        supportFragmentManager.beginTransaction().add(R.id.homeLayoutContainer,HomeFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.homeLayoutContainer,NoteFragment()).commit()
 
     }
 }
