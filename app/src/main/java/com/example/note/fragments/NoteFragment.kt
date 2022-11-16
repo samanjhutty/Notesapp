@@ -1,9 +1,7 @@
 package com.example.note.fragments
 
-import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Note
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +16,7 @@ import com.example.note.adapter.RecyclerViewAdapterNote
 import com.example.note.databinding.FragmentNoteListBinding
 import com.example.note.roomdb.NoteDb
 import com.example.note.roomdb.NoteEntity
+import java.util.*
 
 class NoteFragment : Fragment() {
     private lateinit var binding:FragmentNoteListBinding
@@ -30,18 +29,23 @@ class NoteFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_note_list, container, false)
         list= listOf()
-        val mlist=binding.list
-        mlist.layoutManager =  GridLayoutManager(requireContext(),3)
+        
+        binding.list.layoutManager =  GridLayoutManager(requireContext(),3)
 
         getData()
 
         binding.btnAddNote.setOnClickListener {
-            binding.layoutMain.visibility = View.GONE
             requireActivity().supportFragmentManager.beginTransaction().apply {
                 remove(NoteFragment())
+                setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
                 replace(R.id.homeLayoutContainer, AddFragment())
+                addToBackStack(null)
             }.commit()
-
         }
 
         binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -56,21 +60,20 @@ class NoteFragment : Fragment() {
 
         binding.view.setOnClickListener {
             val popup = PopupMenu(requireContext(), binding.view)
-            //Inflating the Popup using xml file
             popup.menuInflater.inflate(R.menu.menu, popup.menu)
 
-            popup.setOnMenuItemClickListener{
+            popup.setOnMenuItemClickListener{ it ->
                 when(it.itemId){
                     R.id.title->{
-                        list.sortedBy { it.title }
-                        adapter = RecyclerViewAdapterNote(list,this@NoteFragment)
-                        mlist.adapter = adapter
+                        list.sortedBy { it.title?.toLowerCase(Locale.ROOT) }
+                        adapter = RecyclerViewAdapterNote(list,this)
+                        binding.list.adapter = adapter
                         Toast.makeText(requireContext(), "Sorted by title", Toast.LENGTH_SHORT).show()
                     }
                     R.id.sort_date->{
                         list.sortedBy { it.date }
-                        adapter = RecyclerViewAdapterNote(list,this@NoteFragment)
-                        mlist.adapter = adapter
+                        adapter = RecyclerViewAdapterNote(list,this)
+                        binding.list.adapter = adapter
                         Toast.makeText(requireContext(), "Sorted by date", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -83,12 +86,10 @@ class NoteFragment : Fragment() {
 
     private fun getData() {
         class GetAdapter : AsyncTask<Void, Void, Void>() {
-
             override fun doInBackground(vararg p0: Void?): Void? {
                 list = NoteDb.gtBase(requireContext()).mynotedao().getData()
                 return null
             }
-
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 adapter = RecyclerViewAdapterNote(list,this@NoteFragment)

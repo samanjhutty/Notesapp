@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/bg_light"
         android:layout_height="match_parent">
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             app:layout_constraintStart_toStartOf="parent"
@@ -12,7 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/layoutMain"
-            android:background="@color/bg_light"
             android:fitsSystemWindows="true"
             tools:context=".HomeActivity">
             <com.google.android.material.appbar.AppBarLayout

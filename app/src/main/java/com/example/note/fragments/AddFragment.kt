@@ -3,10 +3,14 @@ package com.example.note.fragments
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
 import android.provider.ContactsContract.CommonDataKinds.Note
+import android.util.Log
 import android.view.*
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -33,8 +37,10 @@ class AddFragment : Fragment() {
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         // Handle the returned Uri
         imagepath= uri.toString()
-        binding.imagelayout.visibility=View.VISIBLE
-        binding.ivImage.setImageURI(uri)
+        if(uri!=null) {
+            binding.imagelayout.visibility = View.VISIBLE
+            binding.ivImage.setImageURI(uri)
+        }
     }
 
     override fun onCreateView(
@@ -45,7 +51,19 @@ class AddFragment : Fragment() {
 
         val toolbar = binding.toolbar
         getData()
+        binding.ivImage.setOnClickListener{
+            if(binding.ivImageDelete.visibility==View.GONE){
+                binding.ivImageDelete.visibility=View.VISIBLE
+            }
+            else if(binding.ivImageDelete.visibility==View.VISIBLE){
+                Handler().postDelayed({
+                    binding.ivImageDelete.visibility=View.GONE
+                },2000)
+            }
+        }
+
         binding.ivImageDelete.setOnClickListener{
+            imagepath=""
             binding.imagelayout.visibility=View.GONE
         }
         binding.ivBack.setOnClickListener {
@@ -57,7 +75,9 @@ class AddFragment : Fragment() {
                     saveData()
                 } else if (binding.etTitle.text.isNotEmpty()) {
                     saveData()
-                } else if (binding.etContent.text.isEmpty() && binding.etTitle.text.isEmpty()) {
+                } else if (imagepath.isNotEmpty()) {
+                    saveData()
+                }else if (binding.etContent.text.isEmpty() && binding.etTitle.text.isEmpty() && imagepath.isEmpty()) {
                     showFragment()
                 }
             }
@@ -122,22 +142,16 @@ class AddFragment : Fragment() {
 
         return binding.root
     }
-    private fun layoutColorData(selected_n_layout_color:String,text_color:String,layout_bg_color_id:Int,text_hint_color_id:Int,text_color_id:Int){
-        binding.layout.setBackgroundColor(resources.getColor(layout_bg_color_id))
-        binding.imagelayout.setBackgroundColor(resources.getColor(layout_bg_color_id))
-//        window?.statusBarColor = this.resources.getColor(layout_color_id)
-        selectedColor = selected_n_layout_color
-        layoutcolor = selected_n_layout_color
-        binding.etContent.setHintTextColor(resources.getColor(text_hint_color_id))
-        binding.etTitle.setHintTextColor(resources.getColor(text_hint_color_id))
-        binding.etContent.setTextColor(resources.getColor(text_color_id))
-        binding.etTitle.setTextColor(resources.getColor(text_color_id))
-        textcolor=text_color
-    }
 
     private fun showFragment(){
         requireActivity().supportFragmentManager.beginTransaction().apply {
             remove(AddFragment())
+            setCustomAnimations(
+                R.anim.slide_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.slide_out
+            )
             replace(R.id.homeLayoutContainer,NoteFragment())
         }.commit()
     }
@@ -184,6 +198,8 @@ class AddFragment : Fragment() {
             textcolor = bundle.getString("textcolor").toString()
             imagepath = bundle.getString("url").toString()
 
+            Log.e(imagepath,"imagep")
+
             selectedColor=color
             up=true
 
@@ -206,6 +222,21 @@ class AddFragment : Fragment() {
         else{
             up=false
         }
+    }
+
+    private fun layoutColorData(selected_n_layout_color:String,
+                                text_color:String,
+                                layout_bg_color_id:Int,
+                                text_hint_color_id:Int,text_color_id:Int){
+        binding.layout.setBackgroundColor(resources.getColor(layout_bg_color_id))
+        binding.imagelayout.setBackgroundColor(resources.getColor(layout_bg_color_id))
+        selectedColor = selected_n_layout_color
+        layoutcolor = selected_n_layout_color
+        binding.etContent.setHintTextColor(resources.getColor(text_hint_color_id))
+        binding.etTitle.setHintTextColor(resources.getColor(text_hint_color_id))
+        binding.etContent.setTextColor(resources.getColor(text_color_id))
+        binding.etTitle.setTextColor(resources.getColor(text_color_id))
+        textcolor=text_color
     }
 
     private fun myUpdateData() {
@@ -241,7 +272,6 @@ class AddFragment : Fragment() {
 
     private fun delData(){
         class DelData:AsyncTask<Void,Void,Void>(){
-
             override fun doInBackground(vararg p0: Void?): Void ?{
                 val note=NoteEntity()
                 note.id1=id2
@@ -249,7 +279,6 @@ class AddFragment : Fragment() {
                 NoteDb.gtBase(requireContext()).mynotedao().delData(note)
                 return null
             }
-
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
