@@ -77,16 +77,8 @@ class AddFragment : Fragment() {
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.color1 -> {
-                        binding.layout.setBackgroundColor(resources.getColor(R.color.bg_oyster_bay))
-                        binding.imagelayout.setBackgroundColor(resources.getColor(R.color.bg_oyster_bay))
-                        selectedColor = "#d7feff"
-                        layoutcolor = "#d7feff"
-                        binding.etContent.setHintTextColor(resources.getColor(R.color.bg_grey))
-                        binding.etTitle.setHintTextColor(resources.getColor(R.color.bg_grey))
-                        window?.statusBarColor = this.resources.getColor(R.color.bg_oyster_bay)
-                        binding.etContent.setTextColor(resources.getColor(R.color.text_color))
-                        binding.etTitle.setTextColor(resources.getColor(R.color.text_color))
-                        textcolor="#606060"
+                        layoutColorData("#d7feff","#606060",R.color.bg_oyster_bay,R.color.bg_grey,R.color.text_color)
+
                     }
                     R.id.color2 -> {
                         binding.layout.setBackgroundColor(resources.getColor(R.color.bg_cruise))
@@ -217,14 +209,14 @@ class AddFragment : Fragment() {
 
         return binding.root
     }
-    private fun imagedata(selected_n_layout_color:String,text_color:String,layout_color_id:Int,text_color_id:Int){
-        binding.layout.setBackgroundColor(resources.getColor(layout_color_id))
-        binding.imagelayout.setBackgroundColor(resources.getColor(layout_color_id))
+    private fun layoutColorData(selected_n_layout_color:String,text_color:String,layout_bg_color_id:Int,text_hint_color_id:Int,text_color_id:Int){
+        binding.layout.setBackgroundColor(resources.getColor(layout_bg_color_id))
+        binding.imagelayout.setBackgroundColor(resources.getColor(layout_bg_color_id))
 //        window?.statusBarColor = this.resources.getColor(layout_color_id)
         selectedColor = selected_n_layout_color
         layoutcolor = selected_n_layout_color
-        binding.etContent.setHintTextColor(resources.getColor(text_color_id))
-        binding.etTitle.setHintTextColor(resources.getColor(text_color_id))
+        binding.etContent.setHintTextColor(resources.getColor(text_hint_color_id))
+        binding.etTitle.setHintTextColor(resources.getColor(text_hint_color_id))
         binding.etContent.setTextColor(resources.getColor(text_color_id))
         binding.etTitle.setTextColor(resources.getColor(text_color_id))
         textcolor=text_color
