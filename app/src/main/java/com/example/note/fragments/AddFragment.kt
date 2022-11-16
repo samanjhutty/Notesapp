@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.Resource
 import com.example.note.HomeActivity
 import com.example.note.R
 import com.example.note.databinding.FragmentAddBinding
@@ -31,7 +32,6 @@ class AddFragment : Fragment() {
     var textcolor ="#606060"
     var id2:Int=1
     var up=0
-    var count:String="0"
 
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         // Handle the returned Uri
@@ -66,9 +66,10 @@ class AddFragment : Fragment() {
                 } else if (binding.etTitle.text.isNotEmpty()) {
                     saveData()
                 } else if (binding.etContent.text.isEmpty() && binding.etTitle.text.isEmpty()) {
-                    val a = Intent(requireContext(), HomeActivity::class.java)
-                    startActivity(a)
-                    requireActivity().finish()
+                    requireActivity().supportFragmentManager.beginTransaction().apply {
+                        remove(AddFragment())
+                        replace(R.id.homeLayoutContainer,HomeFragment())
+                    }.commit()
                 }
             }
         }
@@ -189,9 +190,10 @@ class AddFragment : Fragment() {
                             } else if (binding.etTitle.text.isNotEmpty()) {
                                 saveData()
                             } else if (binding.etContent.text.isEmpty() && binding.etTitle.text.isEmpty()) {
-                                val a = Intent(requireContext(), HomeActivity::class.java)
-                                startActivity(a)
-                                requireActivity().finish()
+                                requireActivity().supportFragmentManager.beginTransaction().apply {
+                                    remove(AddFragment())
+                                    replace(R.id.homeLayoutContainer,HomeFragment())
+                                }.commit()
                             }
                         }
                     }
@@ -200,9 +202,10 @@ class AddFragment : Fragment() {
                             delData()
                         }
                         if (up == 0) {
-                                val a = Intent(requireContext(), HomeActivity::class.java)
-                                startActivity(a)
-                                requireActivity().finish()
+                            requireActivity().supportFragmentManager.beginTransaction().apply {
+                                remove(AddFragment())
+                                replace(R.id.homeLayoutContainer,HomeFragment())
+                            }.commit()
                         }
                     }
                     R.id.action_attach -> {
@@ -213,6 +216,18 @@ class AddFragment : Fragment() {
             }
 
         return binding.root
+    }
+    private fun imagedata(selected_n_layout_color:String,text_color:String,layout_color_id:Int,text_color_id:Int){
+        binding.layout.setBackgroundColor(resources.getColor(layout_color_id))
+        binding.imagelayout.setBackgroundColor(resources.getColor(layout_color_id))
+//        window?.statusBarColor = this.resources.getColor(layout_color_id)
+        selectedColor = selected_n_layout_color
+        layoutcolor = selected_n_layout_color
+        binding.etContent.setHintTextColor(resources.getColor(text_color_id))
+        binding.etTitle.setHintTextColor(resources.getColor(text_color_id))
+        binding.etContent.setTextColor(resources.getColor(text_color_id))
+        binding.etTitle.setTextColor(resources.getColor(text_color_id))
+        textcolor=text_color
     }
 
     private fun saveData(){
@@ -239,10 +254,10 @@ class AddFragment : Fragment() {
 
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
-                val a=Intent(requireContext(),HomeActivity::class.java)
-                a.putExtra("count",count)
-                startActivity(a)
-                requireActivity().finish()
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    remove(AddFragment())
+                    replace(R.id.homeLayoutContainer,HomeFragment())
+                }.commit()
                 Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_SHORT).show()
             }
         }
@@ -259,7 +274,6 @@ class AddFragment : Fragment() {
             layoutcolor = bundle.getString("laycolor").toString()
             textcolor = bundle.getString("textcolor").toString()
             imagepath = bundle.getString("url").toString()
-            count=bundle.getString("count").toString()
 
             selectedColor=color
             up=1
@@ -313,10 +327,10 @@ class AddFragment : Fragment() {
 
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
-                val a= Intent(requireContext(), HomeActivity::class.java)
-                a.putExtra("count",count)
-                startActivity(a)
-                requireActivity().finish()
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    remove(AddFragment())
+                    replace(R.id.homeLayoutContainer,HomeFragment())
+                }.commit()
                 Toast.makeText(requireContext(), " Data Updated", Toast.LENGTH_SHORT).show()
 
             }
@@ -338,10 +352,10 @@ class AddFragment : Fragment() {
             override fun onPostExecute(result: Void?) {
                 super.onPostExecute(result)
                 Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
-                val a = Intent(requireContext(), HomeActivity::class.java)
-                a.putExtra("count",count)
-                startActivity(a)
-                requireActivity().finish()
+                requireActivity().supportFragmentManager.beginTransaction().apply {
+                    remove(AddFragment())
+                    replace(R.id.homeLayoutContainer,HomeFragment())
+                }.commit()
             }
         }
         DelData().execute()

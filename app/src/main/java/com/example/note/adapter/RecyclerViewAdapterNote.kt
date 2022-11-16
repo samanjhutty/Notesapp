@@ -62,7 +62,6 @@ open class RecyclerViewAdapterNote(
             bundle.putString("laycolor",item.laycolor)
             bundle.putString("textcolor",item.textcolor)
             bundle.putString("url",item.url)
-            bundle.putString("count",itemCount.toString())
             obj.arguments=bundle
             context.requireActivity().findViewById<CoordinatorLayout>(R.id.layoutMain).visibility=View.GONE
             context.requireActivity().supportFragmentManager.beginTransaction().replace(R.id.layoutContainer,obj).commit()
