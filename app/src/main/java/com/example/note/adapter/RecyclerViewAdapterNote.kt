@@ -88,7 +88,7 @@ open class RecyclerViewAdapterNote(
         val content: TextView = binding.tvContent
         val date: TextView = binding.tvDate
         val layout:ConstraintLayout=binding.listLayout
-        val imageShowView:RoundedImageView=binding.viewForImageView
+        val imageShowView:ImageView=binding.viewForImageView
         val noteshowLayout:RelativeLayout=binding.noteShowLayout
     }
 }

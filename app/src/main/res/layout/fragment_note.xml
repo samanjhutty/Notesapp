@@ -21,14 +21,14 @@
             android:background="@color/white"
             android:id="@+id/noteShowLayout"
             android:layout_height="match_parent">
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:layout_alignParentTop="true"
             android:visibility="gone"
-            app:riv_corner_radius_top_left="16dp"
-            app:riv_corner_radius_top_right="16dp"
+            android:layout_marginTop="4dp"
             android:id="@+id/viewForImageView"
             android:layout_width="match_parent"
-            android:layout_height="120dp"/>
+            android:layout_height="110dp"
+            android:contentDescription="@string/image" />
     <TextView
         android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
@@ -37,7 +37,7 @@
         android:background="@android:color/transparent"
         android:id="@+id/tvContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:textAppearance="?attr/textAppearanceListItem" /></RelativeLayout>
     </androidx.cardview.widget.CardView>
     <TextView

@@ -55,12 +55,13 @@ class AddFragment : Fragment() {
             if(binding.ivImageDelete.visibility==View.GONE){
                 binding.ivImageDelete.visibility=View.VISIBLE
             }
-            else if(binding.ivImageDelete.visibility==View.VISIBLE){
+            if(binding.ivImageDelete.visibility==View.VISIBLE){
                 Handler().postDelayed({
                     binding.ivImageDelete.visibility=View.GONE
                 },2000)
             }
         }
+
 
         binding.ivImageDelete.setOnClickListener{
             imagepath=""

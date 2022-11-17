@@ -29,7 +29,7 @@ class NoteFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_note_list, container, false)
         list= listOf()
-        
+
         binding.list.layoutManager =  GridLayoutManager(requireContext(),3)
 
         getData()
@@ -47,16 +47,28 @@ class NoteFragment : Fragment() {
                 addToBackStack(null)
             }.commit()
         }
-
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        binding.searchView.setOnQueryTextListener( object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
+
+//                val tempArr = List<NoteEntity>(20,)
+//
+//                for (arr in list){
+//                    if (arr.title!!.toLowerCase(Locale.getDefault()).contains(p0.toString())){
+//                        tempArr.add(arr)
+//                    }
+//                }
+//
+//                adapter.setData(tempArr)
+//                adapter.notifyDataSetChanged()
                 return true
             }
+
         })
+
 
         binding.view.setOnClickListener {
             val popup = PopupMenu(requireContext(), binding.view)
