@@ -38,6 +38,7 @@
             android:textSize="@dimen/title_text_fragment"
             android:textColor="@color/line"
             android:layout_marginStart="8dp"
+            android:textStyle="bold"
             android:padding="8dp"
             android:layout_marginTop="32dp"
             android:id="@+id/etTitle"
@@ -62,6 +63,7 @@
                 android:id="@+id/ivImage" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivImageDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/cancel" />
         </RelativeLayout>
+
         <EditText
             android:id="@+id/etContent"
             android:layout_width="match_parent"
@@ -88,7 +91,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etTitle" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView></layout>

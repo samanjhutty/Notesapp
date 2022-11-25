@@ -10,7 +10,6 @@ class NoteEntity {
         (autoGenerate = true)
     var id1: Int = 0
 
-
     @ColumnInfo(name = "title")
      var title:String?=null
 

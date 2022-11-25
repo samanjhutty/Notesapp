@@ -4,10 +4,14 @@
       <root url="jar://$PROJECT_DIR$/../../Android/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/../../Android/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/res" />
       <root url="file://$PROJECT_DIR$/../../Android/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f0506f342b75476305b4a8a83002d29c/transformed/room-guava-2.3.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../Android/.gradle/caches/modules-2/files-2.1/androidx.room/room-guava/2.3.0/f4a1ac22b3999fbc255d6080bb7fa17a1cadf010/room-guava-2.3.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-guava/2.3.0/f4a1ac22b3999fbc255d6080bb7fa17a1cadf010/room-guava-2.3.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

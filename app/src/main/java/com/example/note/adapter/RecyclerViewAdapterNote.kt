@@ -1,14 +1,17 @@
 package com.example.note.adapter
 
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.example.note.R
 import com.example.note.databinding.FragmentNoteBinding
 import com.example.note.fragments.AddFragment
@@ -37,11 +40,18 @@ open class RecyclerViewAdapterNote(
         holder.title.text = item.title
         holder.content.text = item.content
         holder.date.text = item.date
+        if(item.url!=null){
+            holder.imageShowView.setImageURI(Uri.parse(item.url))
+            holder.imageShowView.visibility=View.VISIBLE
+        }
+        else if(item.url==null){
+            holder.imageShowView.visibility=View.GONE
+        }
 
         if (item.color != null){
-            holder.content.setBackgroundColor(Color.parseColor(item.color))
+            holder.noteshowLayout.setBackgroundColor(Color.parseColor(item.color))
         }else{
-            holder.content.setBackgroundColor(Color.parseColor(R.color.white.toString()))
+            holder.noteshowLayout.setBackgroundColor(Color.parseColor(R.color.white.toString()))
         }
         if (item.laycolor != null){
             holder.content.setTextColor(Color.parseColor(item.textcolor))
@@ -62,10 +72,9 @@ open class RecyclerViewAdapterNote(
             bundle.putString("laycolor",item.laycolor)
             bundle.putString("textcolor",item.textcolor)
             bundle.putString("url",item.url)
-            bundle.putString("count",itemCount.toString())
             obj.arguments=bundle
             context.requireActivity().findViewById<CoordinatorLayout>(R.id.layoutMain).visibility=View.GONE
-            context.requireActivity().supportFragmentManager.beginTransaction().replace(R.id.layoutContainer,obj).commit()
+            context.requireActivity().supportFragmentManager.beginTransaction().replace(R.id.homeLayoutContainer,obj).commit()
         }
     }
 
@@ -74,5 +83,7 @@ open class RecyclerViewAdapterNote(
         val content: TextView = binding.tvContent
         val date: TextView = binding.tvDate
         val layout:ConstraintLayout=binding.listLayout
+        val imageShowView:ImageView=binding.viewForImageView
+        val noteshowLayout:RelativeLayout=binding.noteShowLayout
     }
 }
