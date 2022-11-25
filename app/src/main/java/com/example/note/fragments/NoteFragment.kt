@@ -1,7 +1,8 @@
 package com.example.note.fragments
 
-import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.example.note.databinding.FragmentNoteListBinding
 import com.example.note.roomdb.NoteDb
 import com.example.note.roomdb.NoteEntity
 import java.util.*
+import java.util.concurrent.Executors
 
 class NoteFragment : Fragment() {
     private lateinit var binding:FragmentNoteListBinding
@@ -97,18 +99,15 @@ class NoteFragment : Fragment() {
     }
 
     private fun getData() {
-        class GetAdapter : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg p0: Void?): Void? {
+        val executor=Executors.newSingleThreadExecutor()
+        val handler=Handler(Looper.getMainLooper())
+        executor.execute {
                 list = NoteDb.gtBase(requireContext()).mynotedao().getData()
-                return null
             }
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
+            handler.post {
                 adapter = RecyclerViewAdapterNote(list,this@NoteFragment)
                 binding.list.adapter = adapter
                 adapter.notifyDataSetChanged()
             }
-        }
-        GetAdapter().execute()
     }
 }

@@ -1,14 +1,14 @@
 package com.example.note.fragments
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
@@ -21,6 +21,7 @@ import com.example.note.roomdb.NoteDb
 import com.example.note.roomdb.NoteEntity
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 class AddFragment : Fragment() {
     private lateinit var binding: FragmentAddBinding
@@ -212,33 +213,27 @@ class AddFragment : Fragment() {
     }
 
     private fun saveData() {
-        class MySave : AsyncTask<Void, Void, Void>() {
-            @SuppressLint("SimpleDateFormat")
-            override fun doInBackground(vararg params: Void?): Void? {
-                val sdf = SimpleDateFormat("EEE, MMM d, ''yy")
-                val currentDate = sdf.format(Date())
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            val sdf = SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
+            val currentDate = sdf.format(Date())
 
-                val notes = NoteEntity()
-                notes.title = binding.etTitle.text.toString()
-                notes.content = binding.etContent.text.toString()
-                notes.color = selectedColor
-                notes.laycolor = layoutcolor
-                notes.textcolor = textcolor
-                notes.date = currentDate.toString()
-                notes.url = imagepath
+            val notes = NoteEntity()
+            notes.title = binding.etTitle.text.toString()
+            notes.content = binding.etContent.text.toString()
+            notes.color = selectedColor
+            notes.laycolor = layoutcolor
+            notes.textcolor = textcolor
+            notes.date = currentDate.toString()
+            notes.url = imagepath
 
-                NoteDb.gtBase(requireContext()).mynotedao().saveData(notes)
-
-                return null
-            }
-
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-                Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_SHORT).show()
-                showFragment()
-            }
+            NoteDb.gtBase(requireContext()).mynotedao().saveData(notes)
         }
-        MySave().execute()
+        handler.post {
+            Toast.makeText(requireContext(), "Data Saved", Toast.LENGTH_SHORT).show()
+            showFragment()
+        }
     }
 
     private fun getData() {
@@ -282,64 +277,78 @@ class AddFragment : Fragment() {
         layout_bg_color_id: Int,
         text_hint_color_id: Int, text_color_id: Int
     ) {
-        binding.layout.setBackgroundColor(ResourcesCompat.getColor(resources,layout_bg_color_id,null))
-        binding.imagelayout.setBackgroundColor(ResourcesCompat.getColor(resources,layout_bg_color_id,null))
+        binding.layout.setBackgroundColor(
+            ResourcesCompat.getColor(
+                resources,
+                layout_bg_color_id,
+                null
+            )
+        )
+        binding.imagelayout.setBackgroundColor(
+            ResourcesCompat.getColor(
+                resources,
+                layout_bg_color_id,
+                null
+            )
+        )
         selectedColor = selected_n_layout_color
         layoutcolor = selected_n_layout_color
-        binding.etContent.setHintTextColor(ResourcesCompat.getColor(resources,text_hint_color_id,null))
-        binding.etTitle.setHintTextColor(ResourcesCompat.getColor(resources,text_hint_color_id,null))
-        binding.etContent.setTextColor(ResourcesCompat.getColor(resources,text_color_id,null))
-        binding.etTitle.setTextColor(ResourcesCompat.getColor(resources,text_color_id,null))
+        binding.etContent.setHintTextColor(
+            ResourcesCompat.getColor(
+                resources,
+                text_hint_color_id,
+                null
+            )
+        )
+        binding.etTitle.setHintTextColor(
+            ResourcesCompat.getColor(
+                resources,
+                text_hint_color_id,
+                null
+            )
+        )
+        binding.etContent.setTextColor(ResourcesCompat.getColor(resources, text_color_id, null))
+        binding.etTitle.setTextColor(ResourcesCompat.getColor(resources, text_color_id, null))
         textcolor = text_color
     }
 
     private fun myUpdateData() {
-        class UpdateMyData : AsyncTask<Void, Void, Void>() {
-            @Deprecated("Deprecated in Java")
-            override fun doInBackground(vararg p0: Void?): Void? {
-                val note = NoteEntity()
-                val sdf = SimpleDateFormat("EEE, MMM d, ''yy",Locale.US)
-                val currentDate = sdf.format(Date())
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            val note = NoteEntity()
+            val sdf = SimpleDateFormat("EEE, MMM d, ''yy", Locale.US)
+            val currentDate = sdf.format(Date())
 
-                note.content = binding.etContent.text.toString()
-                note.title = binding.etTitle.text.toString()
-                note.date = currentDate.toString()
-                note.id1 = id2
-                note.color = selectedColor
-                note.laycolor = layoutcolor
-                note.textcolor = textcolor
-                note.url = imagepath
+            note.content = binding.etContent.text.toString()
+            note.title = binding.etTitle.text.toString()
+            note.date = currentDate.toString()
+            note.id1 = id2
+            note.color = selectedColor
+            note.laycolor = layoutcolor
+            note.textcolor = textcolor
+            note.url = imagepath
 
-                NoteDb.gtBase(requireContext()).mynotedao().updateData(note)
-
-                return null
-            }
-
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-                Toast.makeText(requireContext(), " Data Updated", Toast.LENGTH_SHORT).show()
-                showFragment()
-            }
+            NoteDb.gtBase(requireContext()).mynotedao().updateData(note)
         }
-        UpdateMyData().execute()
+        handler.post {
+            Toast.makeText(requireContext(), " Data Updated", Toast.LENGTH_SHORT).show()
+            showFragment()
+        }
     }
 
     private fun delData() {
-        class DelData : AsyncTask<Void, Void, Void>() {
-            override fun doInBackground(vararg p0: Void?): Void? {
-                val note = NoteEntity()
-                note.id1 = id2
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            val note = NoteEntity()
+            note.id1 = id2
 
-                NoteDb.gtBase(requireContext()).mynotedao().delData(note)
-                return null
-            }
-
-            override fun onPostExecute(result: Void?) {
-                super.onPostExecute(result)
-                Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
-                showFragment()
-            }
+            NoteDb.gtBase(requireContext()).mynotedao().delData(note)
         }
-        DelData().execute()
+        handler.post {
+            Toast.makeText(requireContext(), "Note Deleted", Toast.LENGTH_SHORT).show()
+            showFragment()
+        }
     }
 }
