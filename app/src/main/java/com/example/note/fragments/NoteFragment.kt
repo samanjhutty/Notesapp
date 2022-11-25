@@ -77,7 +77,7 @@ class NoteFragment : Fragment() {
             popup.setOnMenuItemClickListener{ it ->
                 when(it.itemId){
                     R.id.title->{
-                        list.sortedBy { it.title?.toLowerCase(Locale.ROOT) }
+                        list.sortedBy { it.title?.lowercase(Locale.ROOT) }
                         adapter = RecyclerViewAdapterNote(list,this)
                         binding.list.adapter = adapter
                         Toast.makeText(requireContext(), "Sorted by title", Toast.LENGTH_SHORT).show()

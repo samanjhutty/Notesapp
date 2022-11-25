@@ -72,6 +72,7 @@
                 android:backgroundTint="@color/white"
                 android:src="@drawable/cancel" />
         </RelativeLayout>
+
         <EditText
             android:id="@+id/etContent"
             android:layout_width="match_parent"
